@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://cysdnogve6gl7"]
+
+[ext_resource type="Script" path="res://Scripts/FollowerAI.gd" id="1_ggoab"]
+[ext_resource type="Script" path="res://Scripts/FollowAgent.gd" id="2_ja3i2"]
+[ext_resource type="Texture2D" uid="uid://brt6n77v6ynn1" path="res://Assets/Sprites/tile_0084.png" id="3_2qkvc"]
+[ext_resource type="Script" path="res://GameUnit.gd" id="4_tcn5r"]
+[ext_resource type="Script" path="res://Scripts/Hurtbox.gd" id="5_at30b"]
+[ext_resource type="Resource" uid="uid://ds6u303ej75t3" path="res://player_stats.tres" id="5_s78rc"]
+[ext_resource type="Script" path="res://Scripts/Healbox.gd" id="6_bhnon"]
+[ext_resource type="Script" path="res://Scenes/Healthbar.gd" id="8_h6kxc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxjd6"]
+radius = 5.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5o63"]
+radius = 5.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_12qy7"]
+radius = 9.0
+
+[node name="Follower" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_ggoab")
+path_to_player = NodePath("../CharacterBody2D/TeamFormation/Marker2D")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+script = ExtResource("2_ja3i2")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_2qkvc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uxjd6")
+
+[node name="GameUnit" type="Node2D" parent="."]
+script = ExtResource("4_tcn5r")
+stats = ExtResource("5_s78rc")
+
+[node name="Hurtbox" type="Area2D" parent="GameUnit"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("5_at30b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameUnit/Hurtbox"]
+shape = SubResource("CapsuleShape2D_t5o63")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="Healbox" type="Area2D" parent="GameUnit"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("6_bhnon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameUnit/Healbox"]
+shape = SubResource("CircleShape2D_12qy7")
+debug_color = Color(0, 0.639216, 0.388235, 0.419608)
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Interface"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+script = ExtResource("8_h6kxc")
+
+[node name="HealthBar" type="TextureProgressBar" parent="Interface/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="health_changed" from="GameUnit" to="Interface/Control" method="_on_game_unit_health_changed"]

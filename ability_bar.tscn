@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwlxkdysax6v"]
+
+[ext_resource type="Script" path="res://Scripts/AbilityBar.gd" id="1_qgcbo"]
+
+[node name="AbilityBar" type="Node2D"]
+script = ExtResource("1_qgcbo")

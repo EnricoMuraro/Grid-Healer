@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dny6tj1bx4rfh"]
+
+[ext_resource type="Script" path="res://Scripts/Hitbox.gd" id="1_37wm1"]
+[ext_resource type="Script" path="res://Scripts/DamageZone.gd" id="1_ta0f2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdxqx"]
+radius = 64.0312
+
+[node name="DamageZone" type="Node2D"]
+script = ExtResource("1_ta0f2")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_37wm1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_fdxqx")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

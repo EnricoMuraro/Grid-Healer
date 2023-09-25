@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://ds6u303ej75t3"]
+
+[ext_resource type="Script" path="res://Scripts/CharacterStats.gd" id="1_xdy02"]
+
+[resource]
+script = ExtResource("1_xdy02")
+Health = 100
