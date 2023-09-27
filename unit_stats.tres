@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=9 format=3 uid="uid://cwln7c15cnlqw"]
+
+[ext_resource type="Script" path="res://Scripts/Stat.gd" id="1_mhvnp"]
+[ext_resource type="Script" path="res://Scripts/CharacterStats.gd" id="1_w3116"]
+
+[sub_resource type="Resource" id="Resource_4t4n8"]
+script = ExtResource("1_mhvnp")
+base_value = 0.0
+modifiers = Array[Resource("res://Scripts/Modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_xuwns"]
+script = ExtResource("1_mhvnp")
+base_value = 0.0
+modifiers = Array[Resource("res://Scripts/Modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_jtqby"]
+script = ExtResource("1_mhvnp")
+base_value = 0.0
+modifiers = Array[Resource("res://Scripts/Modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_hfslj"]
+script = ExtResource("1_mhvnp")
+base_value = 100.0
+modifiers = Array[Resource("res://Scripts/Modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_r1wmn"]
+script = ExtResource("1_mhvnp")
+base_value = 0.0
+modifiers = Array[Resource("res://Scripts/Modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_y1pcw"]
+script = ExtResource("1_mhvnp")
+base_value = 0.0
+modifiers = Array[Resource("res://Scripts/Modifier.gd")]([])
+
+[resource]
+script = ExtResource("1_w3116")
+max_health = SubResource("Resource_hfslj")
+max_mana = SubResource("Resource_r1wmn")
+armor = SubResource("Resource_4t4n8")
+magic_resistance = SubResource("Resource_jtqby")
+strength = SubResource("Resource_y1pcw")
+intellect = SubResource("Resource_xuwns")

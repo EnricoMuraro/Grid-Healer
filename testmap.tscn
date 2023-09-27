@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cvped2sukwt1p"]
+[gd_scene load_steps=25 format=3 uid="uid://cvped2sukwt1p"]
 
 [ext_resource type="Texture2D" uid="uid://cn5dld2q0w5ic" path="res://Assets/SimpleAtlas.png" id="1_06ned"]
 [ext_resource type="Texture2D" uid="uid://dw7ituj1u8i7n" path="res://Assets/TinyDungeonAtlas.png" id="2_5iw2w"]
@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://bodfkq4o7e6rr" path="res://Assets/Sprites/tile_0085.png" id="5_6bi33"]
 [ext_resource type="PackedScene" uid="uid://cysdnogve6gl7" path="res://Scenes/follower.tscn" id="6_2tw3s"]
 [ext_resource type="PackedScene" uid="uid://bwlxkdysax6v" path="res://ability_bar.tscn" id="6_tlfar"]
-[ext_resource type="PackedScene" uid="uid://dny6tj1bx4rfh" path="res://Scripts/DamageZone.tscn" id="7_2yg3e"]
+[ext_resource type="PackedScene" uid="uid://dny6tj1bx4rfh" path="res://Scenes/DamageZone.tscn" id="7_2yg3e"]
+[ext_resource type="Resource" uid="uid://bmnhttis2sl8w" path="res://Scenes/Abilities/healing_wave.tres" id="7_74r1h"]
 [ext_resource type="Texture2D" uid="uid://3borr60xcdq" path="res://icon.svg" id="8_snxb4"]
+[ext_resource type="Resource" uid="uid://cwln7c15cnlqw" path="res://unit_stats.tres" id="9_5p0rx"]
+[ext_resource type="PackedScene" uid="uid://dqfot7i44a0md" path="res://Scripts/BuffZone.tscn" id="12_npjmy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ta48r"]
 texture = ExtResource("1_06ned")
@@ -1000,6 +1003,9 @@ sources/3 = SubResource("TileSetAtlasSource_lr3oo")
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxjd6"]
 radius = 5.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8jvc"]
+size = Vector2(64, 64)
+
 [node name="Node" type="Node"]
 
 [node name="Background" type="ColorRect" parent="."]
@@ -1052,19 +1058,32 @@ shape = SubResource("CircleShape2D_uxjd6")
 [node name="RayCast2D" type="RayCast2D" parent="CharacterBody2D"]
 
 [node name="AbilityBar" parent="CharacterBody2D" instance=ExtResource("6_tlfar")]
+abilities = Array[Resource("res://Scripts/Ability.gd")]([ExtResource("7_74r1h")])
 
 [node name="Follower2" parent="." instance=ExtResource("6_2tw3s")]
 position = Vector2(301, 74)
+stats = ExtResource("9_5p0rx")
 path_to_player = NodePath("../CharacterBody2D/TeamFormation/position2")
 
 [node name="Follower" parent="." instance=ExtResource("6_2tw3s")]
 position = Vector2(137.666, 103.035)
+stats = ExtResource("9_5p0rx")
 path_to_player = NodePath("../CharacterBody2D/TeamFormation/position1")
 
 [node name="DamageZone" parent="." instance=ExtResource("7_2yg3e")]
-position = Vector2(343, 232)
+position = Vector2(336, 224)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="DamageZone"]
 modulate = Color(1, 1, 1, 0.34902)
 scale = Vector2(0.77, 0.77)
 texture = ExtResource("8_snxb4")
+
+[node name="BuffZone" parent="." instance=ExtResource("12_npjmy")]
+position = Vector2(336, 160)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" parent="BuffZone/Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_o8jvc")
+
+[editable path="BuffZone"]

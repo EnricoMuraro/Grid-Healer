@@ -1,11 +1,50 @@
 [gd_scene load_steps=13 format=3 uid="uid://c3tggeoydbmhv"]
 
-[ext_resource type="Script" path="res://healing_wave.gd" id="1_jn67m"]
-[ext_resource type="Script" path="res://Scripts/Hitbox.gd" id="1_rc1dk"]
-[ext_resource type="Texture2D" uid="uid://bxr0y2yshbyyc" path="res://Assets/healingwave.png" id="3_7wo81"]
+[ext_resource type="Script" path="res://Scripts/healing_wave_effect.gd" id="1_rb88b"]
+[ext_resource type="Script" path="res://Scripts/Hitbox.gd" id="2_3420g"]
+[ext_resource type="Texture2D" uid="uid://bxr0y2yshbyyc" path="res://Assets/healingwave.png" id="3_omhq4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v84bv"]
 radius = 56.0
+
+[sub_resource type="Animation" id="Animation_yfvtj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealingWaveSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealingWaveSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HealingWaveSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_rvlyn"]
 resource_name = "healing_wave_cast"
@@ -85,45 +124,6 @@ tracks/5/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_yfvtj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HealingWaveSprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HealingWaveSprite:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HealingWaveSprite:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_se0qr"]
 _data = {
 "RESET": SubResource("Animation_yfvtj"),
@@ -165,8 +165,8 @@ radial_accel_max = 90.0
 scale_curve = SubResource("CurveTexture_s6l31")
 color_ramp = SubResource("GradientTexture1D_l7tq5")
 
-[node name="Healing Wave" type="Node2D"]
-script = ExtResource("1_jn67m")
+[node name="Healing Wave Effect" type="Node2D"]
+script = ExtResource("1_rb88b")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
@@ -174,7 +174,7 @@ wait_time = 0.2
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 32
-script = ExtResource("1_rc1dk")
+script = ExtResource("2_3420g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_v84bv")
@@ -186,7 +186,7 @@ libraries = {
 
 [node name="HealingWaveSprite" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("3_7wo81")
+texture = ExtResource("3_omhq4")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false

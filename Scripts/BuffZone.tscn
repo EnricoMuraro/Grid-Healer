@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqfot7i44a0md"]
+
+[ext_resource type="Script" path="res://BuffZone.gd" id="1_nt76w"]
+[ext_resource type="Script" path="res://Scripts/Hitbox.gd" id="2_ijr0x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1ov1"]
+
+[node name="BuffZone" type="Node2D"]
+script = ExtResource("1_nt76w")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("2_ijr0x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_d1ov1")

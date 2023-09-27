@@ -2,13 +2,16 @@ class_name Ally
 extends CharacterBody2D
 
 var tile_size = 16
+@export var stats: CharacterStats
 @export var movement_speed: float = 64
 @export var path_to_player = NodePath()
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var player := get_node(path_to_player)
+@onready var unit := $GameUnit
 
 func _ready():
+	unit.set_stats(stats)
 	# These values need to be adjusted for the actor's speed
 	# and the navigation layout.
 	navigation_agent.path_desired_distance = 1.0

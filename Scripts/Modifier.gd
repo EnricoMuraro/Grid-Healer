@@ -2,8 +2,13 @@ class_name Modifier
 extends Resource
 
 enum Type {FLAT, PERCENTAGE}
-@export var type : Modifier.Type
-@export var value : float
+@export var type: Modifier.Type
+@export var value: float
+
+func initialize(v, t) -> Modifier:
+	value = v
+	type = t
+	return self
 
 static func calculate_modifiers(starting_value, modifiers:Array[Modifier]):
 	var flat_amount = 0

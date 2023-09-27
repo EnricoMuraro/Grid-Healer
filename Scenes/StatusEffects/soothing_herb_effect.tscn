@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dov7uyiedfoxb"]
+
+[ext_resource type="Script" path="res://Scripts/SoothingHerbEffect.gd" id="1_sdrrl"]
+
+[node name="SoothingHerbEffect" type="Node2D"]
+script = ExtResource("1_sdrrl")

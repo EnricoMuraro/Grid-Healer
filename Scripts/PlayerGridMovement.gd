@@ -20,11 +20,9 @@ func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += Vector2.ONE * tile_size / 2
 	
-func _physics_process(delta):
-	
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("ability1"):
-		ability_bar.activate_ability()
-	
+		ability_bar.activate_ability(0)
 	for dir in inputs.keys():
 		if Input.is_action_just_pressed(dir) && dir not in last_inputs:
 			last_inputs.append(dir)
@@ -44,7 +42,6 @@ func _physics_process(delta):
 		if position.distance_to(target) > 0.1:
 			move_and_slide()
 		else:
-			print(position)
 			moving = false
 
 	
